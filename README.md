@@ -9,7 +9,7 @@ exactly (no `0.1 + 0.2` surprises).
 Requires Python 3.12+ and [uv](https://docs.astral.sh/uv/).
 
 ```bash
-git clone https://github.com/<your-username>/expense-tracker.git
+git clone https://github.com/umairsaeeddev/expense-tracker.git
 cd expense-tracker
 uv sync
 ```

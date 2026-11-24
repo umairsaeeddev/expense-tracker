@@ -29,6 +29,13 @@ def test_add_zero_amount_is_an_error(file: str, capsys: pytest.CaptureFixture[st
     assert capsys.readouterr().err == "Error: amount: Input should be greater than 0\n"
 
 
+def test_add_bad_date_is_an_error(file: str, capsys: pytest.CaptureFixture[str]) -> None:
+    with pytest.raises(SystemExit) as exc_info:
+        main(["--file", file, "add", "5", "food", "--date", "2026-13-01"])
+    assert exc_info.value.code == 2
+    assert "invalid date (use YYYY-MM-DD): '2026-13-01'" in capsys.readouterr().err
+
+
 def test_list_by_month(file: str, capsys: pytest.CaptureFixture[str]) -> None:
     add_sample_expenses(file)
     capsys.readouterr()

@@ -28,6 +28,14 @@ def parse_month(text: str) -> str:
         raise argparse.ArgumentTypeError(f"invalid month (use YYYY-MM): {text!r}") from None
 
 
+def parse_date(text: str) -> datetime.date:
+    """Accept 'YYYY-MM-DD' and return a date."""
+    try:
+        return datetime.date.fromisoformat(text.strip())
+    except ValueError:
+        raise argparse.ArgumentTypeError(f"invalid date (use YYYY-MM-DD): {text!r}") from None
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="expense-tracker", description="Track expenses in a JSON file."
@@ -41,7 +49,7 @@ def build_parser() -> argparse.ArgumentParser:
     add.add_argument("description", nargs="?", default="", help="optional description")
     add.add_argument(
         "--date",
-        type=datetime.date.fromisoformat,
+        type=parse_date,
         metavar="YYYY-MM-DD",
         help="the date of the expense (default: today)",
     )

@@ -9,13 +9,6 @@ class TrackerError(Exception):
     Catch this to handle any tracker failure in one place (e.g. in the CLI).
     """
 
-    def __init__(self, message: str = "expense tracker error") -> None:
-        self.message = message
-        super().__init__(message)
-
-    def __str__(self) -> str:
-        return self.message
-
 
 class StoreError(TrackerError):
     """The expense file could not be read or written, or holds invalid data (e.g. corrupt JSON)."""
